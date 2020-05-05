@@ -1,19 +1,19 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.*;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -69,28 +69,64 @@ public class Main extends Application {
   });
         //text标签
         TextField text=new TextField();
-        text.setText("这是文本");
-        text.setLayoutX(100);
+        text.setText("请输入账号");
+        text.setLayoutX(200);
         text.setLayoutY(100);
+        text.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("asdssd");
+            }
+        });
+       // text.setPrefWidth(200);
+       // text.setPrefHeight(100);
 
-        text.setPrefWidth(200);
-        text.setPrefHeight(100);
+        text.setFont(Font.font(12));
 
-        text.setFont(Font.font(24));
+       // Background bk1= new Background(
+       //         new BackgroundFill(Paint.valueOf("#8A2BE2"),
+        //        new CornerRadii(20),
+        //        new Insets(10)));
+       // text.setBackground(bk1);
+                //text设置七个以下
+        text.setPromptText("请输入7个字以下");
+        text.setFocusTraversable(false);
+        text.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println(newValue);
+                if(newValue.length()>7)
+                {
+                    text.setText(oldValue);
+                }
+            }
+        });
 
-        Background bk1= new Background(
-                new BackgroundFill(Paint.valueOf("#8A2BE2"),
-                new CornerRadii(20),
-                new Insets(10)));
-        text.setBackground(bk1);
+
+        //password设置
+        PasswordField ptext=new PasswordField();
+        ptext.setLayoutX(200);
+        ptext.setLayoutY(125);
+        ptext.setText("输入密码");
+        //label
+        Label label=new Label("我是账号：");
+        label.setLayoutX(150);
+        label.setLayoutY(105);
+        label.setTextFill(Paint.valueOf("red"));
+
+        Label label2=new Label("我是密码：");
+        label2.setLayoutX(150);
+        label2.setLayoutY(125);
+
 
         //root
         Group root1=new Group();
 
         root1.getChildren().add(b1);
         root1.getChildren().add(text);
-
-
+        root1.getChildren().add(ptext);
+        root1.getChildren().add(label);
+        root1.getChildren().add(label2);
         Scene scene=new Scene(root1);
 
         //快捷键
