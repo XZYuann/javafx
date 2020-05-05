@@ -4,12 +4,17 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -19,6 +24,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        //b1按钮
         Button b1= new Button("B1");
 
         b1.setLayoutX(100);
@@ -61,29 +67,38 @@ public class Main extends Application {
           }
       }
   });
+        //text标签
         TextField text=new TextField();
         text.setText("这是文本");
         text.setLayoutX(100);
         text.setLayoutY(100);
-        text.setFont(Font.font(14));
-    //    text.setBackground();
 
+        text.setPrefWidth(200);
+        text.setPrefHeight(100);
 
-        
+        text.setFont(Font.font(24));
+
+        Background bk1= new Background(
+                new BackgroundFill(Paint.valueOf("#8A2BE2"),
+                new CornerRadii(20),
+                new Insets(10)));
+        text.setBackground(bk1);
+
+        //root
         Group root1=new Group();
 
         root1.getChildren().add(b1);
         root1.getChildren().add(text);
-     //   root1.setLayoutX(200);
+
 
         Scene scene=new Scene(root1);
 
-
+        //快捷键
         KeyCombination kc1=new KeyCodeCombination(KeyCode.O,KeyCombination.SHIFT_DOWN,KeyCombination.ALT_ANY);
         Mnemonic mnemonic=new Mnemonic(b1,kc1);
         scene.addMnemonic(mnemonic);
 
-
+        //场景设置
         primaryStage.setScene(scene);
 
         primaryStage.setTitle("javafx");
@@ -93,8 +108,9 @@ public class Main extends Application {
     }
  
 
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+//主方法设置
         launch(Main.class,args);
     }
 }
