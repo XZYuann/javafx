@@ -69,8 +69,7 @@ public class Main extends Application {
     //    text.setBackground();
 
 
-
-
+        
         Group root1=new Group();
 
         root1.getChildren().add(b1);
