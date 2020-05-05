@@ -1,16 +1,14 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -63,13 +61,29 @@ public class Main extends Application {
           }
       }
   });
-      
+        TextField text=new TextField();
+        text.setText("这是文本");
+        text.setLayoutX(100);
+        text.setLayoutY(100);
+        text.setFont(Font.font(14));
+    //    text.setBackground();
+
+
+
 
         Group root1=new Group();
 
         root1.getChildren().add(b1);
+        root1.getChildren().add(text);
+     //   root1.setLayoutX(200);
 
         Scene scene=new Scene(root1);
+
+
+        KeyCombination kc1=new KeyCodeCombination(KeyCode.O,KeyCombination.SHIFT_DOWN,KeyCombination.ALT_ANY);
+        Mnemonic mnemonic=new Mnemonic(b1,kc1);
+        scene.addMnemonic(mnemonic);
+
 
         primaryStage.setScene(scene);
 
